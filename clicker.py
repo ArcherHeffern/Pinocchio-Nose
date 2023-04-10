@@ -1,4 +1,5 @@
 import pygame
+from dragger import Draggable
 
 pygame.init()
 
@@ -7,6 +8,7 @@ win_width = 800
 win_height = 600
 win = pygame.display.set_mode((win_width, win_height))
 pygame.display.set_caption("My Clicker Game")
+draggable = Draggable(100, 100, 50, 50, (255, 0, 0), win)
 
 # Set up the button
 button_width = 200
@@ -32,18 +34,24 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if button_rect.collidepoint(event.pos):
                 score += 1
-
+            draggable.handle_event(event)
+        elif pygame.MOUSEBUTTONUP:
+            draggable.handle_event(event)
     # Clear the screen
     win.fill((0, 0, 0))
 
     # Draw the button
     pygame.draw.rect(win, button_color, button_rect)
+ 
+    draggable.update()
+    draggable.draw()
 
     # Draw the score
     score_text = font.render("Score: " + str(score), True, (255, 255, 255))
     win.blit(score_text, (20, 20))
 
     # Update the display
+    pygame.display.flip()
     pygame.display.update()
 
 # Clean up
