@@ -17,7 +17,7 @@ button_color = (255, 255, 255)
 button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
 
 # Set up the font
-font = pygame.font.SysFont(None, 48)
+font = pygame.font.SysFont("Arial", 32)
 
 # Set up the score
 score = 0
